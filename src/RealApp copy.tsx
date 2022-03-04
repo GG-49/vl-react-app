@@ -35,14 +35,6 @@ function classNames(...classes: string[]) {
 function App() {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-white border-b border-gray-200">
           {({ open }) => (
@@ -209,7 +201,7 @@ function App() {
 
 
               </div>
-              {/* /End replace */}
+
             </div>
           </main>
         </div>

@@ -1,93 +1,52 @@
 import React from 'react';
-// import * as Yup from 'yup';
-import { withFormik, FormikProps, FormikErrors, Form, Field } from 'formik';
+import { useFormik } from 'formik';
 
-const EditCard = (props: any) => { 
- 
-  
+const EditCard = () => {
+  // Note that we have to initialize ALL of fields with values. These
+  // could come from props, but since we don’t want to prefill this form,
+  // we just use an empty string. If we don’t do this, React will yell
+  // at us.
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return (
+    <form onSubmit={formik.handleSubmit}>
+      <label htmlFor="firstName">First Name</label>
+      <input
+        id="firstName"
+        name="firstName"
+        type="text"
+        onChange={formik.handleChange}
+        value={formik.values.firstName}
+      />
 
-    <div>Edit Card here</div>
+      <label htmlFor="lastName">Last Name</label>
+      <input
+        id="lastName"
+        name="lastName"
+        type="text"
+        onChange={formik.handleChange}
+        value={formik.values.lastName}
+      />
 
+      <label htmlFor="email">Email Address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        onChange={formik.handleChange}
+        value={formik.values.email}
+      />
+
+      <button type="submit">Submit</button>
+    </form>
   );
-}
-
+};
 export default EditCard;
-
-
-// // Shape of form values
-// interface FormValues {
-//   email: string;
-//   password: string;
-// }
-
-// interface OtherProps {
-//   message: string;
-// }
-
-// // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
-// const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-//   const { touched, errors, isSubmitting, message } = props;
-//   return (
-//     <Form>
-//       <h1>{message}</h1>
-//       <Field type="email" name="email" />
-//       {touched.email && errors.email && <div>{errors.email}</div>}
-
-//       <Field type="password" name="password" />
-//       {touched.password && errors.password && <div>{errors.password}</div>}
-
-//       <button type="submit" disabled={isSubmitting}>
-//         Submit
-//       </button>
-//     </Form>
-//   );
-// };
-
-// // The type of props MyForm receives
-// interface MyFormProps {
-//   initialEmail?: string;
-//   message: string; // if this passed all the way through you might do this or make a union type
-// }
-
-// // Wrap our form with the withFormik HoC
-// const MyForm = withFormik<MyFormProps, FormValues>({
-//   // Transform outer props into form values
-//   mapPropsToValues: props => {
-//     return {
-//       email: props.initialEmail || '',
-//       password: '',
-//     };
-//   },
-
-//   // Add a custom validation function (this can be async too!)
-//   validate: (values: FormValues) => {
-//     let errors: FormikErrors<FormValues> = {};
-//     if (!values.email) {
-//       errors.email = 'Required';
-//     } else if (!isValidEmail(values.email)) {
-//       errors.email = 'Invalid email address';
-//     }
-//     return errors;
-//   },
-
-//   handleSubmit: values => {
-//     // do submitting things
-//   },
-// })(InnerForm);
-
-// // Use <MyForm /> wherevs
-// const Basic = () => (
-//   <div>
-//     <h1>My App</h1>
-//     <p>This can be anywhere in your application</p>
-//     <MyForm message="Sign up" />
-//   </div>
-// );
-
-// export default Basic;
-
-
-
-
-

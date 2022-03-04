@@ -1,34 +1,19 @@
+import { useState } from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
-import React from 'react';
-import Editcard from './Editcard';
+import React, { Component, MouseEventHandler } from 'react';
+import ReactDOM from 'react-dom';
+import EditCard from './EditCard';
+import Modal from 'react-modal';
+
+// function handleClick(): void {
+//   console.log('Function not implemented.');
+// }
 
 
-function Cards(props: any) {
+function Cards(this: any, props: any): JSX.Element {
 
-  function handleClick(_Editcheck: any): void {
-    throw new Error('How to loose your patience in 1 min..');
-  }
-  
-  
+  const [EditDetail, setEditDetail] = useState(false);
 
-  // ---------------------------------------------------------
-
-  // const CardDetail = props. any;
-
-  // const [Userdetail, setUserdetail] = useState(!!CardDetail)
-
-  // const handleEditClick = async (id: any,isCardedit: (props: any) => void) => {
-  //   if (isCardedit()) {
-  //     await createCardDetail(id)()
-  //     setCarddetail(true)
-  //   } else {
-  //     await deleteCardDetail(id)()
-  //     if (setCarddetail) {
-  //       setReloadData(!reloadData)
-  //     } else setCardedit(!isCardedit)
-  //   }
-  // }
-  // ----------------------------------------------------------
   return (
     <div>
       <li key={props.user.id} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
@@ -67,19 +52,23 @@ function Cards(props: any) {
             <div className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <a href="#" className="text-indigo-600 hover:text-indigo-900">
                 <div>
-                <span className="inline-flex rounded-md shadow-sm">
-                    <button>
-                      <svg className="w-6 h-6" 
-                        fill="currentColor" 
-                        viewBox="0 0 20 20" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        onClick={() => handleClick(props.user.id, users)}
+                  <span className="inline-flex rounded-md shadow-sm">
+                      <button onClick={() => props.setShowModal(true)}>
+                        <svg className="Openedit w-6 h-6" 
+                          fill="currentColor" 
+                          viewBox="0 0 20 20" 
+                          xmlns="http://www.w3.org/2000/svg"
                         >
-                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                </span>
+                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                          <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
+                        </svg>
+                      </button>
+
+                      {/* <Modal>
+                         {setEditDetail || <EditCard closeEdit={setEditDetail}/>}
+                      </Modal> */}
+                      {/* {setEditDetail || <EditCard closeEdit={setEditDetail}/>} */}
+                  </span>
                 </div>
               </a>
             </div>
@@ -87,31 +76,8 @@ function Cards(props: any) {
         </div>
 
       </li>
+  
     </div>
   )
 }
 export default Cards;
-
-
-function handleClick(_id: any, _users: any): void {
-
-  class Editcheck extends React.Component {
-
-    handleClick(value: string) {
-      return function() {
-        console.log(value)
-      }
-    };
-  
-    render() {
-      console.log('xxxxx')
-      return <button onClick={this.handleClick('Editcard')}>Editcard</button>;
-    }
-  }
-  // throw new Error('Function not implemented.');
-}
-
-function users(_id: any, _users: any): void {
-  throw new Error('Function not implemented.');
-}
-
