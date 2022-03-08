@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
-import React, { Component, MouseEventHandler } from 'react';
-import ReactDOM from 'react-dom';
-import EditCard from './EditCard';
-import Modal from 'react-modal';
-
-// function handleClick(): void {
-//   console.log('Function not implemented.');
-// }
-
+import Modal from './Modal'
 
 function Cards(this: any, props: any): JSX.Element {
 
-  const [EditDetail, setEditDetail] = useState(false);
+  const [data, setData] = useState([]);
+
+  const [showModal, setShowModal] = useState(false)
+  
 
   return (
     <div>
@@ -53,28 +48,29 @@ function Cards(this: any, props: any): JSX.Element {
               <a href="#" className="text-indigo-600 hover:text-indigo-900">
                 <div>
                   <span className="inline-flex rounded-md shadow-sm">
-                      <button onClick={() => props.setShowModal(true)}>
-                        <svg className="Openedit w-6 h-6" 
-                          fill="currentColor" 
-                          viewBox="0 0 20 20" 
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-                          <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-                        </svg>
-                      </button>
-
-                      {/* <Modal>
-                         {setEditDetail || <EditCard closeEdit={setEditDetail}/>}
-                      </Modal> */}
-                      {/* {setEditDetail || <EditCard closeEdit={setEditDetail}/>} */}
+                    <button onClick={() => (setShowModal(true))}>
+                      <svg className="Openedit w-6 h-6" 
+                        fill="currentColor" 
+                        viewBox="0 0 20 20" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
                   </span>
                 </div>
               </a>
             </div>
           </div>
         </div>
-
+        {showModal && <Modal showModal={showModal} setShowModal={setShowModal} 
+          userId={props.user.id}
+          firstName={props.user.first_name} 
+          lastName={props.user.last_name}
+          eMail={props.user.email}
+          phoneNumber={props.user.phone_number} 
+        />}
       </li>
   
     </div>
