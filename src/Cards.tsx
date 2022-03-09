@@ -2,33 +2,31 @@ import { useState } from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
 import Modal from './Modal'
 
-function Cards(this: any, props: any): JSX.Element {
-
-  const [data, setData] = useState([]);
-
+export const Cards = ({ user }: any) => {
   const [showModal, setShowModal] = useState(false)
-  
 
+  // const [userUpdate, setUserUpdate] = useState(false)
+  
   return (
     <div>
-      <li key={props.user.id} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+      <li key={user.id} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
         <div className="w-full flex items-center justify-between p-6 space-x-6">
           <div className="flex-1 truncate">
             <div className="flex items-center space-x-3">
-              <h3 className="text-gray-900 text-sm font-medium truncate">{props.user.first_name} {props.user.last_name}</h3>
+              <h3 className="text-gray-900 text-sm font-medium truncate">{user.first_name} {user.last_name}</h3>
               <span className="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full">
-                {props.user.employment.key_skill}
+                {user.employment.key_skill}
               </span>
             </div>
-            <p className="mt-1 text-gray-500 text-sm truncate">{props.user.employment.title}</p>
+            <p className="mt-1 text-gray-500 text-sm truncate">{user.employment.title}</p>
           </div>
-          <img className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src={props.user.avatar} alt="" />
+          <img className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src={user.avatar} alt="" />
         </div>
         <div>
           <div className="-mt-px flex divide-x divide-gray-200">
             <div className="w-0 flex-1 flex">
               <a
-                href={`mailto:${props.user.email}`}
+                href={`mailto:${user.email}`}
                 className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
               >
                 <MailIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -37,7 +35,7 @@ function Cards(this: any, props: any): JSX.Element {
             </div>
             <div className="-ml-px w-0 flex-1 flex">
               <a
-                href={`tel:${props.user.phone_number}`}
+                href={`tel:${user.phone_number}`}
                 className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
               >
                 <PhoneIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -65,11 +63,12 @@ function Cards(this: any, props: any): JSX.Element {
           </div>
         </div>
         {showModal && <Modal showModal={showModal} setShowModal={setShowModal} 
-          userId={props.user.id}
-          firstName={props.user.first_name} 
-          lastName={props.user.last_name}
-          eMail={props.user.email}
-          phoneNumber={props.user.phone_number} 
+          userId={user.id}
+          firstName={user.first_name} 
+          lastName={user.last_name}
+          eMail={user.email}
+          phoneNumber={user.phone_number} 
+          user={user}
         />}
       </li>
   
@@ -77,3 +76,5 @@ function Cards(this: any, props: any): JSX.Element {
   )
 }
 export default Cards;
+
+

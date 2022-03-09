@@ -2,20 +2,19 @@ import { UserAddIcon } from '@heroicons/react/outline';
 import { useFormik } from 'formik';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
-const EditCard = ({userId, eMail, firstName, lastName, phoneNumber}: any): JSX.Element => {
+const EditCard = ({setShowModal, userId,  firstName, lastName, eMail, phoneNumber, user}: any): JSX.Element => {
   // console.log(firstName)
   
   return <div> 
 
 
-    <h1>Anywhere in your app!</h1>
+    {/* <h1>Anywhere in your app!</h1> */}
     <Formik
       initialValues={{ 
-        
         userid: userId,
-        email: eMail, 
         firstname: firstName,
         lastname: lastName,
+        email: eMail, 
         phonenumber: phoneNumber
       }}
       validate={values => {
@@ -30,10 +29,16 @@ const EditCard = ({userId, eMail, firstName, lastName, phoneNumber}: any): JSX.E
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
+        user.lastName='XXX'
+
+        setTimeout(() => { 
           alert(JSON.stringify(values, null, 2));
+          setShowModal(false);
           setSubmitting(false);
         }, 400);
+// Now to use userUpdate to "file" the changes
+        console.log('EditC values ', values)
+
       }}
     >
       {({
@@ -95,74 +100,35 @@ const EditCard = ({userId, eMail, firstName, lastName, phoneNumber}: any): JSX.E
             />
             {errors.lastname && touched.lastname && errors.lastname}
           </div>
+
+          <div>
+            <label htmlFor="phonenumber">Telephone - </label>
+            <input
+              type="text"
+              name="lastname"
+              className="bg-gray-300 mr-2 py-1 px-2 mb-1"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.phonenumber}
+            />
+            {errors.phonenumber && touched.phonenumber && errors.phonenumber}
+          </div>
+
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
+
+              {/* <div className="footer">
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </div> */}
+
+
+
         </form>
       )}
     </Formik>
   </div>
 };
-
 export default EditCard;
-
-
-
-
-
-
-
-
-
-
-
-
-// function EditCard(props: any): JSX.Element {
-//     const formik = useFormik({
-//       initialValues: {
-//         first_name: '',
-//         last_name: '',
-//         email: '',
-//       },
-//       onSubmit: values => {
-//         alert(JSON.stringify(values, null, 2));
-//         console.log('CCC ', values);
-//       },
-//     });
-
-//     return (
-//       <Formik> 
-//       <Form onSubmit={formik.handleSubmit}>
-
-//         <label htmlFor="firstName">First Name</label>
-//         <input
-//           id="firstName"
-//           name="firstName"
-//           type="text"
-//           onChange={formik.handleChange}
-//           value={formik.values.first_name} />
-
-//         <label htmlFor="lastName">Last Name</label>
-//         <input
-//           id="lastName"
-//           name="lastName"
-//           type="text"
-//           onChange={formik.handleChange}
-//           value={formik.values.last_name} />
-
-//         <label htmlFor="email">Email Address</label>
-//         <input
-//           id="email"
-//           name="email"
-//           type="email"
-//           onChange={formik.handleChange}
-//           value={formik.values.email} />
-
-//         <button type="submit">Submit</button>
-    
-//       </Form>
-//       </Formik>
-//     );
-// }
-
-// export default EditCard;
